@@ -1,4 +1,4 @@
-name: Stopit (ubuntu)
+name: Timed Threads (ubuntu)
 
 on:
   push:
@@ -11,18 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.12', '3.11', '3.8', '3.9', '3.10']
+        python-version: ['3.12', '3.11', '3.9', '3.10']
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install stopit
+    - name: Install Timed Threads
       run: |
         python -m pip install --upgrade pip
         pip install "setuptools>=70.0.0" packaging pytest
-        pip install -e .
-    - name: Test stopit
+        pip install -e .[dev]
+    - name: Test Timed threads
       run: |
-        python tests.py
+        pytest test

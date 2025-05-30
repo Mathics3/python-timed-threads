@@ -1,35 +1,24 @@
-======
-stopit
-======
+==============
+Timed Threads
+==============
 
-Raise asynchronous exceptions in other threads, control the timeout of
-blocks or callables with two context managers and two decorators.
+Adds the ability to set absolute time deadlines on asynchronous threads, and allows one thread to stop
+another by means of raising an exception.
 
-.. attention:: API Changes
-
-   Users of 1.0.0 should upgrade their source code:
-
-   - ``stopit.Timeout`` is renamed ``stopit.ThreadingTimeout``
-   - ``stopit.timeoutable`` is renamed ``stopit.threading_timeoutable``
-
-   Explications follow below...
-
-.. contents::
 
 Overview
 ========
 
 This module provides:
 
-- a function that raises an exception in another thread, including the main
+- a function that allows an exception to be raised in another thread, including the main
   thread.
 
-- two context managers that may stop its inner block activity on timeout.
+- context managers that may stop its inner block activity on timeout.
 
-- two decorators that may stop its decorated callables on timeout.
+- decorators that may stop its decorated callables on timeout.
 
-Developed and tested with CPython 2.6, 2.7, 3.3 and 3.4 on MacOSX. Should work
-on any OS (xBSD, Linux, Windows) except when explicitly mentioned.
+Developed and tested with CPython 3.9+ using Python's threading model.
 
 .. note::
 
@@ -47,8 +36,7 @@ Both work identically:
 
 .. code:: bash
 
-  easy_install stopit
-  pip install stopit
+  pip install -e .
 
 Developing ``stopit``
 ---------------------

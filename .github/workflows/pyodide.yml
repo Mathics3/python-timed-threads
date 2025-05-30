@@ -1,6 +1,6 @@
 # Copied from SymPy https://github.com/sympy/sympy/pull/27183
 
-name: Stopit (Pyodide)
+name: Timed Theads (Pyodide)
 
 on:
   push:
@@ -60,4 +60,4 @@ jobs:
           . .venv-pyodide/bin/activate
           echo $PATH
           python -c "import sys; print(sys.path); import stopit"
-          # python tests.py
+          # python test
