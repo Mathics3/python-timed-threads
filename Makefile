@@ -39,7 +39,7 @@ clean:
 	@find . -name *.pyc -type f -delete;
 
 #: Run py.test tests. Use environment variable "o" for pytest options
-pytest: mathics_scanner/data/character-tables.json
+pytest:
 	$(PYTHON) -m pytest test $o
 
 #: Remove ChangeLog

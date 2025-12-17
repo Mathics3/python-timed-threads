@@ -1,23 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-=================
-stopit.threadstop
-=================
-
 Raise asynchronous exceptions in other thread, control the timeout of blocks
 or callables with a context manager or a decorator.
 """
 
 import ctypes
-import sys
 import threading
 
-from .utils import LOG, TimeoutException, BaseTimeout, base_timeoutable
+from timed_threads.utils import BaseTimeout, TimeoutException, base_timeoutable
 
-if sys.version_info < (3, 7):
-    tid_ctype = ctypes.c_long
-else:
-    tid_ctype = ctypes.c_ulong
+tid_ctype = ctypes.c_ulong
 
 
 def async_raise(target_tid, exception):
@@ -35,7 +27,7 @@ def async_raise(target_tid, exception):
     )
     # ctypes.pythonapi.PyGILState_Release(gil_state)
     if ret == 0:
-        raise ValueError("Invalid thread ID {}".format(target_tid))
+        raise ValueError(f"Invalid thread ID {target_tid}")
     elif ret > 1:
         ctypes.pythonapi.PyThreadState_SetAsyncExc(tid_ctype(target_tid), None)
         raise SystemError("PyThreadState_SetAsyncExc failed")
@@ -45,7 +37,7 @@ class ThreadingTimeout(BaseTimeout):
     """Context manager for limiting in the time the execution of a block
     using asynchronous threads launching exception.
 
-    See :class:`stopit.utils.BaseTimeout` for more information
+    See :class:`timed_threads.utils.BaseTimeout` for more information
     """
 
     # This class property keep track about who produced the
