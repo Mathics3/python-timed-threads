@@ -1,6 +1,9 @@
 Changes log
 ===========
 
+2.0.0 - 2025
+------------
+
 1.1.2 - 2018-02-09
 ------------------
 
@@ -16,7 +19,7 @@ Changes log
 1.1.0 - 2014-05-02
 ------------------
 
-* Added support for TIMER signal based timeout control (Posix OS only)
+* Added support for TIMER signal based timeout control (POSIX OS only)
 * API changes due to new timeout controls
 * An exhaustive documentation.
 

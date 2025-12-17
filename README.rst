@@ -1,35 +1,29 @@
-======
-stopit
-======
+==============
+Timed Threads
+==============
 
-Raise asynchronous exceptions in other threads, control the timeout of
-blocks or callables with two context managers and two decorators.
+Adds the ability to set relative elapsed time deadlines on asynchronous threads, and allows one thread to stop another by means of raising an exception.
 
-.. attention:: API Changes
+Note that due to the GIL lock in Python 3.14, this does not give us any more concurrency.
 
-   Users of 1.0.0 should upgrade their source code:
+It is hoped that in the future, in conjunction with an implementation of Python that does not have a global GIL lock there can be and implementation that improves concurrency of hardware threads.
 
-   - ``stopit.Timeout`` is renamed ``stopit.ThreadingTimeout``
-   - ``stopit.timeoutable`` is renamed ``stopit.threading_timeoutable``
+The main motivation of this module is to support TimedConstraint in the open-source implementation of Mathematica, called Mathics3.
 
-   Explications follow below...
-
-.. contents::
 
 Overview
 ========
 
 This module provides:
 
-- a function that raises an exception in another thread, including the main
+- a function that allows an exception to be raised in another thread, including the main
   thread.
 
-- two context managers that may stop its inner block activity on timeout.
+- context managers that may stop its inner block activity on timeout.
 
-- two decorators that may stop its decorated callables on timeout.
+- decorators that may stop its decorated callables on timeout.
 
-Developed and tested with CPython 2.6, 2.7, 3.3 and 3.4 on MacOSX. Should work
-on any OS (xBSD, Linux, Windows) except when explicitly mentioned.
+Developed and tested with CPython 3.10+ using Python's threading model.
 
 .. note::
 
@@ -40,28 +34,17 @@ on any OS (xBSD, Linux, Windows) except when explicitly mentioned.
 Installation
 ============
 
-Using ``stopit`` in your application
-------------------------------------
+.. code:: bash
 
-Both work identically:
+  pip install Timed-Threads
+
+
+To install from source:
 
 .. code:: bash
 
-  easy_install stopit
-  pip install stopit
+  pip install -e .
 
-Developing ``stopit``
----------------------
-
-.. code:: bash
-
-  # You should prefer forking if you have a Github account
-  git clone https://github.com/glenfant/stopit.git
-  cd stopit
-  python setup.py develop
-
-  # Does it work for you ?
-  python setup.py test
 
 Public API
 ==========
@@ -69,17 +52,17 @@ Public API
 Exception
 ---------
 
-``stopit.TimeoutException``
+``timed_threads.TimeoutException``
 ...........................
 
-A ``stopit.TimeoutException`` may be raised in a timeout context manager
+A ``timed_threads.TimeoutException`` may be raised in a timeout context manager
 controlled block.
 
 This exception may be propagated in your application at the end of execution
 of the context manager controlled block, see the ``swallow_ex`` parameter of
 the context managers.
 
-Note that the ``stopit.TimeoutException`` is always swallowed after the
+Note that the ``timed_threads.TimeoutException`` is always swallowed after the
 execution of functions decorated with ``xxx_timeoutable(...)``. Anyway, you
 may catch this exception **within** the decorated function.
 
@@ -97,7 +80,7 @@ Threading based resources
    executing a ``time.sleep(20)``, the asynchronous exception is effective
    **after** its execution.
 
-``stopit.async_raise``
+``timed_threads.async_raise``
 ......................
 
 A function that raises an arbitrary exception in another thread
@@ -110,7 +93,7 @@ A function that raises an arbitrary exception in another thread
 
 - ``exception`` is the exception class or object to raise in the thread.
 
-``stopit.ThreadingTimeout``
+``timed_threads.ThreadingTimeout``
 ...........................
 
 A context manager that "kills" its inner block execution that exceeds the
@@ -121,13 +104,13 @@ provided time.
 - ``seconds`` is the number of seconds allowed to the execution of the context
   managed block.
 
-- ``swallow_exc`` : if ``False``, the possible ``stopit.TimeoutException`` will
+- ``swallow_exc`` : if ``False``, the possible ``timed_threads.TimeoutException`` will
   be re-raised when quitting the context managed block. **Attention**: a
   ``True`` value does not swallow other potential exceptions.
 
 **Methods and attributes**
 
-of a ``stopit.ThreadingTimeout`` context manager.
+of a ``timed_threads.ThreadingTimeout`` context manager.
 
 .. list-table::
    :header-rows: 1
@@ -162,7 +145,7 @@ of a ``stopit.ThreadingTimeout`` context manager.
 
    * - ``.INTERRUPTED``
      - The code under timeout control may itself raise explicit
-       ``stopit.TimeoutException`` for any application logic reason that may
+       ``timed_threads.TimeoutException`` for any application logic reason that may
        occur. This intentional exit can be spotted from outside the timeout
        controlled block with this state value.
 
@@ -176,9 +159,9 @@ A typical usage:
 
 .. code:: python
 
-   import stopit
+   import timed_threads
    # ...
-   with stopit.ThreadingTimeout(10) as to_ctx_mgr:
+   with timed_threads.ThreadingTimeout(10) as to_ctx_mgr:
        assert to_ctx_mgr.state == to_ctx_mgr.EXECUTING
        # Something potentially very long but which
        # ...
@@ -207,13 +190,13 @@ indicating (if ``True``) that the block executed normally:
        # Yes, the code under timeout control completed
        # Objects it created or changed may be considered consistent
 
-``stopit.threading_timeoutable``
+``timed_threads.threading_timeoutable``
 ................................
 
 A decorator that kills the function or method it decorates, if it does not
 return within a given time frame.
 
-``stopit.threading_timeoutable([default [, timeout_param]])``
+``timed_threads.threading_timeoutable([default [, timeout_param]])``
 
 - ``default`` is the value to be returned by the decorated function or method of
   when its execution timed out, to notify the caller code that the function
@@ -224,7 +207,7 @@ return within a given time frame.
 
   .. code:: python
 
-     @stopit.threading_timeoutable(default='not finished')
+     @timed_threads.threading_timeoutable(default='not finished')
      def infinite_loop():
          # As its name says...
 
@@ -238,7 +221,7 @@ return within a given time frame.
 
   .. code:: python
 
-     @stopit.threading_timeoutable(timeout_param='my_timeout')
+     @timed_threads.threading_timeoutable(timeout_param='my_timeout')
      def some_slow_function(a, b, timeout='whatever'):
          # As its name says...
 
@@ -264,9 +247,9 @@ Signaling based resources
    Using signaling based resources will **not** work under Windows or any OS
    that's not based on Unix.
 
-``stopit.SignalTimeout`` and ``stopit.signal_timeoutable`` have exactly the
+``timed_threads.SignalTimeout`` and ``timed_threads.signal_timeoutable`` have exactly the
 same API as their respective threading based resources, namely
-`stopit.ThreadingTimeout`_ and `stopit.threading_timeoutable`_.
+`timed_threads.ThreadingTimeout`_ and `timed_threads.threading_timeoutable`_.
 
 See the `comparison chart`_ that warns on the more or less subtle differences
 between the `Threading based resources`_ and the `Signaling based resources`_.
@@ -274,14 +257,14 @@ between the `Threading based resources`_ and the `Signaling based resources`_.
 Logging
 -------
 
-The ``stopit`` named logger emits a warning each time a block of code
+The ``timed_threads`` named logger emits a warning each time a block of code
 execution exceeds the associated timeout. To turn logging off, just:
 
 .. code:: python
 
    import logging
-   stopit_logger = logging.getLogger('stopit')
-   stopit_logger.setLevel(logging.ERROR)
+   timed_threads_logger = logging.getLogger('timed_threads')
+   timed_threads_logger.setLevel(logging.ERROR)
 
 .. _comparison chart:
 
@@ -369,7 +352,7 @@ managed block or decorated functions are executing.
 Threading timeout control as mentioned in `Threading based resources`_ does not work as expected
 when used in the context of a gevent worker.
 
-See the discussion in `Issue 13 <https://github.com/glenfant/stopit/issues/13>`_ for more details.
+See the discussion in `Issue 13 <https://github.com/glenfant/timed_threads/issues/13>`_ for more details.
 
 Tests and demos
 ===============
@@ -377,19 +360,19 @@ Tests and demos
 .. code:: pycon
 
    >>> import threading
-   >>> from stopit import async_raise, TimeoutException
+   >>> from timed_threads import async_raise, TimeoutException
 
 In a real application, you should either use threading based timeout resources:
 
 .. code:: pycon
 
-   >>> from stopit import ThreadingTimeout as Timeout, threading_timeoutable as timeoutable  #doctest: +SKIP
+   >>> from timed_threads import ThreadingTimeout as Timeout, threading_timeoutable as timeoutable  #doctest: +SKIP
 
 Or the POSIX signal based resources:
 
 .. code:: pycon
 
-   >>> from stopit import SignalTimeout as Timeout, signal_timeoutable as timeoutable  #doctest: +SKIP
+   >>> from timed_threads import SignalTimeout as Timeout, signal_timeoutable as timeoutable  #doctest: +SKIP
 
 Let's define some utilities:
 
@@ -633,17 +616,18 @@ Links
 =====
 
 Source code (clone, fork, ...)
-  https://github.com/glenfant/stopit
+  https://github.com/glenfant/timed_threads
 
 Issues tracker
-  https://github.com/glenfant/stopit/issues
+  https://github.com/glenfant/timed_threads/issues
 
 PyPI
-  https://pypi.python.org/pypi/stopit
+  https://pypi.python.org/pypi/timed_threads
 
 Credits
 =======
 
+- This is a modernization for newer Python of Gilles Lenfant `stopit <https://pypi.org/project/stopit/>`_ with some slight changes.
 - This is a NIH package which is mainly a theft of `Gabriel Ahtune's recipe
   <http://gahtune.blogspot.fr/2013/08/a-timeout-context-manager.html>`_ with
   tests, minor improvements and refactorings, documentation and setuptools

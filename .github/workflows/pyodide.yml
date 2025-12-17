@@ -1,6 +1,6 @@
 # Copied from SymPy https://github.com/sympy/sympy/pull/27183
 
-name: Stopit (Pyodide)
+name: Timed Theads (Pyodide)
 
 on:
   push:
@@ -54,10 +54,10 @@ jobs:
           pip install "setuptools>=70.0.0" PyYAML click packaging pytest
 
           pip install --no-build-isolation -v -v -v  -e .
-      - name: Test stopit
+      - name: Test Timed Threads
         run: |
           # Activate the virtual environment
           . .venv-pyodide/bin/activate
           echo $PATH
-          python -c "import sys; print(sys.path); import stopit"
-          # python tests.py
+          python -c "import sys; print(sys.path); import timed_threads"
+          # python test
