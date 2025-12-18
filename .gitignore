@@ -23,7 +23,6 @@
 *.pyo
 .DS_Store
 /.python-version
-/ChangeLog-spell-corrected
 /Timed_Threads.egg-info
 /.pyodide-xbuildenv*
 /.python-version

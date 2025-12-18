@@ -11,8 +11,10 @@ RM  ?= rm
 PIP_INSTALL_OPTS ?=
 
 .PHONY: all build \
+   ChangeLog-without-corrections \
    check clean \
    develop \
+   dist \
    pytest \
    rmChangeLog \
    test
@@ -25,7 +27,7 @@ develop:
 	$(PIP) install -e .$(PIP_INSTALL_OPTS)
 
 dist:
-	$(PYTHON) -m build --sdist
+	$(PYTHON) -m build --sdist && $(PYTHON) -m build --wheel
 
 #: Install development version of timed_threads
 install:
@@ -54,6 +56,5 @@ ChangeLog-without-corrections:
 	git log --pretty --numstat --summary | $(GIT2CL) >ChangeLog
 
 #: Create a ChangeLog from git via git log and git2cl
-ChangeLog: rmChangeLog
-	ChangeLog-without-corrections
+ChangeLog: rmChangeLog ChangeLog-without-corrections
 	patch ChangeLog < ChangeLog-spell-corrected.diff

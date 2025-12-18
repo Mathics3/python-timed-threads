@@ -1,8 +1,17 @@
-Changes log
-===========
+Changes
+=======
 
-2.0.0 - 2025
-------------
+2.0.0 - 2025-12-17
+------------------
+
+* Change to be suitable for Mathics3:
+  - use ``pyproject.toml`` for packaging
+  - works on Python 3.10 to 3.14
+  - uses Mathics3-style precommit hooks and editorconfig
+
+* Change ``ALARM`` list to store absolute time rather than relative time
+* Change name from ``stopit`` to ``Timed-Threads`` with module ``timed_threads``
+
 
 1.1.2 - 2018-02-09
 ------------------

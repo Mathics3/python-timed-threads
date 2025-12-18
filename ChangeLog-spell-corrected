@@ -1,0 +1,248 @@
+2025-12-17  rocky <rb@dustyfeet.com>
+
+	* Makefile, timed_threads/version.py: Get ready for release 2.0.0
+
+2025-12-17  R. Bernstein <rocky@users.noreply.github.com>
+
+	* : Merge pull request #1 from
+	Mathics3/revise-for-modern-conventions Reworked for current Python conventions
+
+2025-05-30  rocky <rb@dustyfeet.com>
+
+	* .editorconfig, .github/workflows/macos.yml,
+	.github/workflows/pyodide.yml, .github/workflows/ubuntu.yml,
+	.github/workflows/windows.yml, .gitignore, .pre-commit-config.yaml,
+	CHANGES.rst, ChangeLog-spell-corrected.diff, Makefile, README.rst,
+	admin-tools/git2cl, pyproject.toml, setup.cfg, setup.py,
+	src/stopit/__init__.py, test/test_basic.py, tests.py,
+	timed_threads/__init__.py, {src/stopit =>
+	timed_threads}/signalstop.py, {src/stopit =>
+	timed_threads}/threadstop.py, {src/stopit =>
+	timed_threads}/utils.py, timed_threads/version.py: Reworked for
+	current Python conventions * Use pyproject.toml * Reorganize along current Python project guidelines * Revise tests for pytest
+
+2025-01-18  R. Bernstein <rocky@users.noreply.github.com>
+
+	* : Merge pull request #3 from
+	Mathics3/fixing_nested_Timeout_contexts_using_signal-rocky Bump version
+
+2025-01-18  rocky <rb@dustyfeet.com>
+
+	* .github/workflows/pyodide.yml: See what's up with pyodide
+
+2025-01-18  R. Bernstein <rocky@users.noreply.github.com>
+
+	* : commit bc8c5c282ccc11ac6a8f15ee9a8678bfd3da4a60 Author: rocky
+	<rb@dustyfeet.com> Date:   Sat Jan 18 09:15:22 2025 -0500
+
+2025-01-18  rocky <rb@dustyfeet.com>
+
+	* .gitignore: More ignore
+
+2025-01-18  rocky <rb@dustyfeet.com>
+
+	* .github/workflows/pyodide.yml, src/stopit/signalstop.py,
+	src/stopit/utils.py, tests.py: Minimal stopit load
+
+2025-01-08  mmatera <matera@fisica.unlp.edu.ar>
+
+	* .github/workflows/pyodide.yml: more verbose install
+
+2025-01-08  mmatera <matera@fisica.unlp.edu.ar>
+
+	* .github/workflows/pyodide.yml: fix workflow
+
+2025-01-08  mmatera <matera@fisica.unlp.edu.ar>
+
+	* .github/workflows/pyodide.yml, setup.py: change version
+
+2025-01-06  rocky <rb@dustyfeet.com>
+
+	* setup.py: Bump version
+
+2025-01-05  mmatera <matera@fisica.unlp.edu.ar>
+
+	* .github/workflows/macos.yml, .github/workflows/pyodide.yml,
+	.github/workflows/ubuntu.yml, .github/workflows/windows.yml: rename
+	workflows
+
+2025-01-04  mmatera <matera@fisica.unlp.edu.ar>
+
+	* .github/workflows/pyodide.yml: pip through python
+
+2025-01-04  mmatera <matera@fisica.unlp.edu.ar>
+
+	* tests.py: removing control prints
+
+2025-01-04  mmatera <matera@fisica.unlp.edu.ar>
+
+	* tests.py: improve await function
+
+2025-01-04  mmatera <matera@fisica.unlp.edu.ar>
+
+	* tests.py: reordering tests
+
+2025-01-04  mmatera <matera@fisica.unlp.edu.ar>
+
+	* tests.py: check time
+
+2025-01-04  mmatera <matera@fisica.unlp.edu.ar>
+
+	* tests.py: show duration in test
+
+2025-01-04  mmatera <matera@fisica.unlp.edu.ar>
+
+	* .github/workflows/pyodide.yml: no build isolation
+
+2025-01-04  mmatera <matera@fisica.unlp.edu.ar>
+
+	* tests.py: fix typo
+
+2025-01-04  mmatera <matera@fisica.unlp.edu.ar>
+
+	* .github/workflows/pyodide.yml: pyodide workflow
+
+2025-01-04  mmatera <matera@fisica.unlp.edu.ar>
+
+	* .github/workflows/macos.yml, .github/workflows/windows.yml: macos
+	and windows workflows
+
+2025-01-04  mmatera <matera@fisica.unlp.edu.ar>
+
+	* .github/workflows/ubuntu.yml: adding dependencies
+
+2025-01-04  mmatera <matera@fisica.unlp.edu.ar>
+
+	* .github/workflows/ubuntu.yml: workflows
+
+2025-01-04  mmatera <matera@fisica.unlp.edu.ar>
+
+	* src/stopit/utils.py: comment out the warning when the timeout is
+	reached.
+
+2025-01-04  mmatera <matera@fisica.unlp.edu.ar>
+
+	* src/stopit/signalstop.py, src/stopit/threadstop.py,
+	src/stopit/utils.py, tests.py: fix nested timeout contexts using
+	signals
+
+2025-01-03  mmatera <matera@fisica.unlp.edu.ar>
+
+	* src/stopit/threadstop.py, tests.py: fix nested timers when using
+	Threads
+
+2024-01-09  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* : Merge pull request #31 from kajaste/ulong37 Use ulong for thread id on Python >= 3.7
+
+2019-08-27  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* : Merge pull request #22 from bartbroere/patch-1 Fix typo in setLevel
+
+2019-08-03  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* : Merge pull request #21 from graingert/patch-1 link to github from pypi
+
+2018-02-09  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* : commit 6634d280fb607d18774460988f264752f5cae436 Author: Gilles
+	Lenfant <gilles.lenfant@gmail.com> Date:   Fri Feb 9 00:28:49 2018
+	+0100
+
+2018-02-09  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* LICENSE: Create LICENSE
+
+2017-12-31  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* README.rst: Typo
+
+2017-12-31  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* README.rst: RST syntax fix
+
+2017-12-31  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* README.rst: Comment on issue #13 "wontfix"
+
+2016-09-02  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* : Merge pull request #12 from Randl/patch-1 README typo signaling -> signal fixed
+
+2016-02-18  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* : Merge pull request #9 from magni-/patch-1 Fix the smallest of typos
+
+2016-02-07  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* : Merge pull request #8 from guysoft/to_ctx_mgr-typo Fix to_ctx_mrg to_ctx_mgr typo
+
+2015-03-22  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* CHANGES.rst: Release ready
+
+2015-03-20  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* README.rst: Supportedversions and rst markup change
+
+2015-03-20  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* CHANGES.rst, README.rst, setup.py, src/stopit/utils.py: * Fixed bug of timeout context manager as bool under Python 2.x * Tested with Python 3.4
+
+2015-01-01  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* README.rst: Typo : status <- state
+
+2014-05-02  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* MANIFEST.in: Added the MANIFEST.in to add missing dist files
+
+2014-05-02  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* CHANGES.rst, README.rst: Finished the doc before releasing
+
+2014-05-02  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* README.rst: Some typo on the doc...
+
+2014-05-02  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* CHANGES.rst, README.rst, setup.py, src/stopit/__init__.py,
+	src/stopit/signalstop.py, src/stopit/threadstop.py,
+	src/stopit/utils.py, tests.py: Completed the documentation and
+	cleanup
+
+2014-05-01  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* README.rst, setup.py, src/stopit/__init__.py,
+	src/stopit/signalstop.py, src/stopit/threadstop.py,
+	src/stopit/utils.py, stopit.py, tests.py: Added timeoutcontrol with
+	posix signals
+
+2014-03-07  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* .gitignore: Python 3 cache
+
+2014-02-09  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* setup.py: Marking 1st release
+
+2014-02-09  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* README.rst: Fixed rst formatting
+
+2014-02-09  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* README.rst: Fixed rst warning
+
+2014-02-09  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* README.rst: Added more doc
+
+2014-02-09  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* setup.py: marked dev version
+
+2014-02-09  Gilles Lenfant <gilles.lenfant@gmail.com>
+
+	* Initial

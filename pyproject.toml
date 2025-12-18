@@ -7,7 +7,7 @@ name = "Timed-Threads"
 description = "Absolute time deadlines and thread cancelling for Python asynchronous threads"
 requires-python = ">=3.10"
 readme = "README.rst"
-license = {text = "MIT"}
+license = "MIT"
 maintainers = [
     {name = "Mathics3 Group"},
 ]
@@ -21,7 +21,6 @@ classifiers = [
           "Programming Language :: Python :: 3.13",
           "Programming Language :: Python :: 3.14",
           "Operating System :: OS Independent",
-          "License :: OSI Approved :: MIT License",
           "Intended Audience :: Developers",
           "Development Status :: 5 - Production/Stable"
 ]

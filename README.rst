@@ -53,7 +53,7 @@ Exception
 ---------
 
 ``timed_threads.TimeoutException``
-...........................
+..................................
 
 A ``timed_threads.TimeoutException`` may be raised in a timeout context manager
 controlled block.
@@ -81,7 +81,7 @@ Threading based resources
    **after** its execution.
 
 ``timed_threads.async_raise``
-......................
+..............................
 
 A function that raises an arbitrary exception in another thread
 
@@ -94,7 +94,7 @@ A function that raises an arbitrary exception in another thread
 - ``exception`` is the exception class or object to raise in the thread.
 
 ``timed_threads.ThreadingTimeout``
-...........................
+...................................
 
 A context manager that "kills" its inner block execution that exceeds the
 provided time.
@@ -191,7 +191,7 @@ indicating (if ``True``) that the block executed normally:
        # Objects it created or changed may be considered consistent
 
 ``timed_threads.threading_timeoutable``
-................................
+.......................................
 
 A decorator that kills the function or method it decorates, if it does not
 return within a given time frame.
@@ -616,10 +616,10 @@ Links
 =====
 
 Source code (clone, fork, ...)
-  https://github.com/glenfant/timed_threads
+  https://github.com/Mathics3/python-timed-threads/timed_threads
 
 Issues tracker
-  https://github.com/glenfant/timed_threads/issues
+  https://github.com/Mathics3/python-timed-threads/timed_threads/issues
 
 PyPI
   https://pypi.python.org/pypi/timed_threads
