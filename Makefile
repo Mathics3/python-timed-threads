@@ -24,7 +24,10 @@ all: develop
 develop:
 	$(PIP) install -e .$(PIP_INSTALL_OPTS)
 
-#: Install timed_threads
+dist:
+	$(PYTHON) -m build --sdist
+
+#: Install development version of timed_threads
 install:
 	$(PYTHON) -m pip install -e .
 
@@ -46,7 +49,11 @@ pytest:
 rmChangeLog:
 	$(RM) ChangeLog || true
 
+#: Create ChangeLog from version control without corrections
+ChangeLog-without-corrections:
+	git log --pretty --numstat --summary | $(GIT2CL) >ChangeLog
+
 #: Create a ChangeLog from git via git log and git2cl
 ChangeLog: rmChangeLog
-	git log --pretty --numstat --summary | $(GIT2CL) >$@
-	patch -p0 ChangeLog < ChangeLog-spell-corrected.diff
+	ChangeLog-without-corrections
+	patch ChangeLog < ChangeLog-spell-corrected.diff
